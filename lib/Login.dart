@@ -8,6 +8,7 @@ class Login extends StatefulWidget {
 }
 
 class LoginState extends State<Login> {
+  FocusNode myFocusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,6 +22,7 @@ class LoginState extends State<Login> {
             spacing: 20,
             children: [
               TextField(
+                focusNode: myFocusNode,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.green),
@@ -34,6 +36,7 @@ class LoginState extends State<Login> {
                 ),
               ),
               TextField(
+                focusNode: myFocusNode,
                 decoration: InputDecoration(
                     enabledBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.green),
@@ -45,6 +48,16 @@ class LoginState extends State<Login> {
                     ),
                     hintText: "Enter Password"
                 ),
+              ),
+              ElevatedButton(
+                child: Text("Click me"),
+                onPressed: () {
+                  if (myFocusNode.hasFocus) {
+                    myFocusNode.dispose();
+                  } else {
+                    myFocusNode.requestFocus();
+                  }
+                },
               )
             ],
           ),
